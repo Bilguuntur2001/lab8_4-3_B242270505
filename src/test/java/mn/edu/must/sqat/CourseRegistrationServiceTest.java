@@ -110,7 +110,10 @@ class CourseRegistrationServiceTest {
     @Test
     @DisplayName("A6: null оролт → IllegalArgumentException, хамаарлуудтай харьцаагүй")
     void register_nullArgument_throwsAndTouchesNoDependency() {
+        // Хоёр аргумент тус бүрийн null-ийг ТУСАД НЬ шалгана (мутант 3-ын дараа нэмсэн:
+        // эхэндээ зөвхөн studentId=null шалгадаг байсан тул "|| courseId == null"-ийг устгасан мутант амьд үлдсэн)
         assertThrows(IllegalArgumentException.class, () -> service.register(null, "CS313"));
+        assertThrows(IllegalArgumentException.class, () -> service.register("B001", null));
 
         verifyNoInteractions(repository, emailSender);
     }
